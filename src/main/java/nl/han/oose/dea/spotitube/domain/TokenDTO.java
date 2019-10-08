@@ -7,6 +7,10 @@ public class TokenDTO {
 
     private static final String DUMMY_TOKEN = "1234-1234-1234";
 
+    public TokenDTO() {
+
+    }
+
     public TokenDTO(UserDTO user) {
         this.token = generateToken();
         this.user = user.getUser();
@@ -23,4 +27,5 @@ public class TokenDTO {
     public String getUser() {
         return user;
     }
+
 }

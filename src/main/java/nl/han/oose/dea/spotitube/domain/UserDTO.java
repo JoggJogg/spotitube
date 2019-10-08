@@ -9,8 +9,12 @@ public class UserDTO {
     private static final String DUMMY_PASSWORD = "123";
 
     public UserDTO() {
-        this.user = DUMMY_USERNAME;
-        this.password = DUMMY_PASSWORD;
+
+    }
+
+    public UserDTO(String user, String password) {
+        this.user = user;
+        this.password = password;
     }
 
     public String getUser() {
@@ -18,5 +22,13 @@ public class UserDTO {
     }
 
     public String getPassword() { return password; }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }
