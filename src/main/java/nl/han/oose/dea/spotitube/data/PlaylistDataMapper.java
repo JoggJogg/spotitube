@@ -12,9 +12,7 @@ public class PlaylistDataMapper extends AbstractMapper {
     private static final String QUERY_FINDALL = "SELECT * FROM spotitube.playlist";
 
     @Override
-    protected String findStatement() {
-        return QUERY_FIND;
-    }
+    protected String findStatement() { return QUERY_FIND; }
 
     @Override
     protected String findAllStatement() { return QUERY_FINDALL; }
