@@ -6,12 +6,9 @@ import nl.han.oose.dea.spotitube.domain.DomainObject;
 import java.sql.*;
 import java.util.*;
 
-public abstract class AbstractMapper<T>  {
+public abstract class AbstractMapper  {
 
     protected Map loadedMap = new HashMap();
-
-    protected AbstractMapper() throws SQLException {
-    }
 
     abstract protected String findStatement();
     abstract protected String findAllStatement();
