@@ -1,9 +1,7 @@
 package nl.han.oose.dea.spotitube;
 
-import com.mysql.cj.log.Log;
-import nl.han.oose.dea.spotitube.datasource.LoginDAO;
-import nl.han.oose.dea.spotitube.domain.UserDTO;
-import nl.han.oose.dea.spotitube.remote.LoginResource;
+import nl.han.oose.dea.spotitube.domain.User;
+import nl.han.oose.dea.spotitube.rest.LoginService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,20 +11,20 @@ import javax.ws.rs.core.Response;
 
 public class LoginResourceTest {
 
-    private LoginResource sut;
-    private UserDTO mockedUser;
+    private LoginService sut;
+    private User mockedUser;
 
     private static final int HTTP_CREATED = 201;
 
     @BeforeEach
     public void setup() {
-        sut = new LoginResource();
+        sut = new LoginService();
     }
 
     @Test
-    public void handleLoginSuccesReturns201StatusCode() {
+    public void handleLoginSuccessReturns201StatusCode() {
         // Arrange
-        mockedUser = Mockito.mock(UserDTO.class);
+        mockedUser = Mockito.mock(User.class);
         // Act
         Response response = sut.handleLogin(mockedUser);
         // Assert
