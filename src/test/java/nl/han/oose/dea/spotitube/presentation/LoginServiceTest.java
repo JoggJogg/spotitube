@@ -1,6 +1,5 @@
-package nl.han.oose.dea.spotitube.rest;
+package nl.han.oose.dea.spotitube.presentation;
 
-import nl.han.oose.dea.spotitube.LoginService;
 import nl.han.oose.dea.spotitube.domain.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

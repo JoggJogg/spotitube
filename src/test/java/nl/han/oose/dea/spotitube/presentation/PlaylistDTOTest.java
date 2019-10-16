@@ -1,9 +1,8 @@
-package nl.han.oose.dea.spotitube.rest;
+package nl.han.oose.dea.spotitube.presentation;
 
-import nl.han.oose.dea.spotitube.PlaylistsDTO;
+import nl.han.oose.dea.spotitube.domain.DomainObject;
 import nl.han.oose.dea.spotitube.domain.Playlist;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -14,7 +13,7 @@ public class PlaylistDTOTest {
 
     private PlaylistsDTO sut;
     private Playlist mockedPlaylist;
-    private List<Playlist> list;
+    private List<DomainObject> list;
 
     private static final int MOCKED_DURATION = 123;
 
@@ -47,4 +46,5 @@ public class PlaylistDTOTest {
         // Assert
         Assertions.assertEquals(duration, MOCKED_DURATION);
     }
+
 }

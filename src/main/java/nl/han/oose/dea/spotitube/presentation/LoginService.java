@@ -1,4 +1,4 @@
-package nl.han.oose.dea.spotitube;
+package nl.han.oose.dea.spotitube.presentation;
 
 import nl.han.oose.dea.spotitube.data.LocalStorage;
 import nl.han.oose.dea.spotitube.domain.Token;
