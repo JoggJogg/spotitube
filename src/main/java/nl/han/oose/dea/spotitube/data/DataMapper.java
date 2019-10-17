@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface DataMapper <T> {
 
-    List<T> findAll(ResultSet rs) throws SQLException;
+    List<T> findAll();
 
     void add(T object);
 
