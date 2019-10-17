@@ -11,7 +11,6 @@ public abstract class AbstractMapper <T extends  DomainObject>  {
     abstract protected String findStatement();
     abstract protected T doLoad(int id, ResultSet rs) throws SQLException;
 
-
     protected T find(String keyword) throws SQLException {
         try {
             DatabaseProperties properties = new DatabaseProperties();
@@ -58,6 +57,4 @@ public abstract class AbstractMapper <T extends  DomainObject>  {
         T result = doLoad(id, rs);
         return result;
     }
-
-
 }

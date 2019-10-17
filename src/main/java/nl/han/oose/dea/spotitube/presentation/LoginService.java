@@ -1,7 +1,5 @@
 package nl.han.oose.dea.spotitube.presentation;
 
-import nl.han.oose.dea.spotitube.data.DataMapper;
-import nl.han.oose.dea.spotitube.data.LocalStorage;
 import nl.han.oose.dea.spotitube.data.LoginCredentialsDataMapper;
 import nl.han.oose.dea.spotitube.domain.Token;
 import nl.han.oose.dea.spotitube.domain.User;
@@ -9,6 +7,7 @@ import nl.han.oose.dea.spotitube.domain.User;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.sql.SQLException;
 
 @Path("/login")
 public class LoginService {
@@ -27,17 +26,21 @@ public class LoginService {
     @Consumes("application/json")
     @Produces("application/json")
     public Response handleLogin(User user) {
-        if(dataMapper.correctLogin(user)) {
-            Token token = new Token(user);
-            return Response
-                    .status(HTTP_CREATED)
-                    .entity(token)
-                    .build();
-        } else {
-            return Response
-                    .status(HTTP_BAD_REQUEST)
-                    .entity(null)
-                    .build();
+        try {
+            if(dataMapper.correctLogin(user)) {
+                Token token = new Token(user);
+                return Response
+                        .status(HTTP_CREATED)
+                        .entity(token)
+                        .build();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return Response
+                .status(HTTP_BAD_REQUEST)
+                .entity(null)
+                .build();
     }
 }
