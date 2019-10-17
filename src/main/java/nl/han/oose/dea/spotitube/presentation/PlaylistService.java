@@ -1,6 +1,8 @@
 package nl.han.oose.dea.spotitube.presentation;
 
 import nl.han.oose.dea.spotitube.data.AbstractMapper;
+import nl.han.oose.dea.spotitube.data.PlaylistDataMapper;
+import nl.han.oose.dea.spotitube.domain.Playlist;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -15,7 +17,7 @@ public class PlaylistService {
     private AbstractMapper dataMapper;
 
     @Inject
-    public void setDataMapper(AbstractMapper dataMapper) {
+    public void setDataMapper(PlaylistDataMapper dataMapper) {
         this.dataMapper = dataMapper;
     }
 

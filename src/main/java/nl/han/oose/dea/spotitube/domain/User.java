@@ -1,5 +1,7 @@
 package nl.han.oose.dea.spotitube.domain;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 public class User extends DomainObject{
 
     private String user;
@@ -8,9 +10,7 @@ public class User extends DomainObject{
     private static final String DUMMY_USERNAME = "jochem";
     private static final String DUMMY_PASSWORD = "123";
 
-    public User() {
-
-    }
+    public User() {}
 
     public User(String user, String password) {
         this.user = user;
@@ -31,4 +31,7 @@ public class User extends DomainObject{
         this.password = password;
     }
 
+    public boolean passWordsMatch(User databaseUser) {
+        return DigestUtils.sha256Hex(this.password).equals(databaseUser.password);
+    }
 }
