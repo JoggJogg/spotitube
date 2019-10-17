@@ -24,10 +24,7 @@ public class LoginCredentialsDataMapper extends AbstractMapper <User> {
 
     public boolean correctLogin(User inputUser) throws SQLException {
         String username = inputUser.getUser();
-
-        ResultSet rs = null;
-        User databaseUser = doLoad(1, rs);
-
-       return inputUser.passWordsMatch(databaseUser);
+        User databaseUser = find(username);
+        return inputUser.passWordsMatch(databaseUser);
     }
 }

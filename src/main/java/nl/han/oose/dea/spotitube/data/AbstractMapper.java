@@ -8,8 +8,6 @@ import java.util.*;
 
 public abstract class AbstractMapper <T extends  DomainObject>  {
 
-    protected Map loadedMap = new HashMap();
-
     abstract protected String findStatement();
     abstract protected T doLoad(int id, ResultSet rs) throws SQLException;
 
@@ -18,7 +16,6 @@ public abstract class AbstractMapper <T extends  DomainObject>  {
         try {
             DatabaseProperties properties = new DatabaseProperties();
             Connection connection = DriverManager.getConnection(properties.connectionString());
-
             PreparedStatement findStatement = connection.prepareStatement(findStatement());
             findStatement.setString(1, keyword);
             ResultSet rs = findStatement.executeQuery();
