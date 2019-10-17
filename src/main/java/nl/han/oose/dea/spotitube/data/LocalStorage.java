@@ -9,7 +9,13 @@ public class LocalStorage implements DataMapper <Token> {
 
     private List<Token> tokens;
 
-    public LocalStorage() {
+    private static LocalStorage soleInstance = new LocalStorage();
+
+    private static LocalStorage getInstance() {
+        return soleInstance;
+    }
+
+    private LocalStorage() {
         tokens = new ArrayList<>();
     }
 
