@@ -1,13 +1,9 @@
 package nl.han.oose.dea.spotitube.data;
 
 import nl.han.oose.dea.spotitube.domain.Token;
-import nl.han.oose.dea.spotitube.domain.User;
-
-import javax.ejb.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
-@Singleton
 public class LocalStorage {
 
     private List<Token> storage;

@@ -10,6 +10,8 @@ public class User extends DomainObject{
     private static final String DUMMY_USERNAME = "jochem";
     private static final String DUMMY_PASSWORD = "123";
 
+    public User() {}
+
     public User(String user, String password) {
         this.user = user;
         this.password = password;
@@ -20,6 +22,14 @@ public class User extends DomainObject{
     }
 
     public String getPassword() { return password; }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public boolean passWordsMatch(User databaseUser) {
         return DigestUtils.sha256Hex(this.password).equals(databaseUser.password);

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
 
-    private static final String QUERY_FIND = "SELECT * FROM spotitube.playlists";
+    private static final String QUERY_FIND = "SELECT * FROM spotitube.Playlist";
 
     @Override
     protected String findStatement() { return QUERY_FIND; }

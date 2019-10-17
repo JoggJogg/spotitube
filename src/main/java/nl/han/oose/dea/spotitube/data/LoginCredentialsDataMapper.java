@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class LoginCredentialsDataMapper extends AbstractMapper <User> {
 
-    private static final String FIND_QUERY = "SELECT password from spotitube.User WHERE username = ?";
+    private static final String FIND_QUERY = "SELECT * from spotitube.User WHERE username = ?";
 
     @Override
     protected String findStatement() {
@@ -17,8 +17,8 @@ public class LoginCredentialsDataMapper extends AbstractMapper <User> {
 
     @Override
     protected User doLoad(int id, ResultSet rs) throws SQLException {
-        String username = rs.getString(1);
-        String password = rs.getString(2);
+        String username = rs.getString(2);
+        String password = rs.getString(3);
         return new User(username, password);
     }
 
