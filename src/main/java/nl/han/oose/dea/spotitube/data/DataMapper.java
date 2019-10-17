@@ -12,6 +12,5 @@ public interface DataMapper <T> {
 
     void delete(int id);
 
-    T find(int id);
-
+    T find(String keyword);
 }

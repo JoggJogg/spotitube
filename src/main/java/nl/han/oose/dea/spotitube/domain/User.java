@@ -23,12 +23,9 @@ public class User extends DomainObject{
 
     public String getPassword() { return password; }
 
-    public void setUser(String user) {
-        this.user = user;
+    public boolean passWordsMatch(User user) {
+        return password.equals(user.getPassword());
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
 }

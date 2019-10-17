@@ -1,29 +1,34 @@
 package nl.han.oose.dea.spotitube.presentation;
 
+import nl.han.oose.dea.spotitube.data.DataMapper;
 import nl.han.oose.dea.spotitube.data.LocalStorage;
+import nl.han.oose.dea.spotitube.data.LoginCredentialsDataMapper;
 import nl.han.oose.dea.spotitube.domain.Token;
 import nl.han.oose.dea.spotitube.domain.User;
 
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-
-import static nl.han.oose.dea.spotitube.data.LoginCredentialsDataMapper.correctLogin;
 
 @Path("/login")
 public class LoginService {
 
+    private LoginCredentialsDataMapper dataMapper;
+
     private static final int HTTP_CREATED = 201;
     private static final int HTTP_BAD_REQUEST = 400;
 
-    LocalStorage storage = new LocalStorage();
+    @Inject
+    public void setDataMapper(LoginCredentialsDataMapper dataMapper) {
+        this.dataMapper = dataMapper;
+    }
 
     @POST
     @Consumes("application/json")
     @Produces("application/json")
     public Response handleLogin(User user) {
-        if(correctLogin(user)) {
+        if(dataMapper.correctLogin(user)) {
             Token token = new Token(user);
-            storage.add(token);
             return Response
                     .status(HTTP_CREATED)
                     .entity(token)

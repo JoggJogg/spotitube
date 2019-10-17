@@ -6,18 +6,14 @@ import nl.han.oose.dea.spotitube.domain.Playlist;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class PlaylistDataMapper extends AbstractMapper {
+public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
 
-    private static final String QUERY_FIND = "SELECT * FROM spotitube.playlists WHERE id = ?";
-    private static final String QUERY_FINDALL = "SELECT * FROM spotitube.playlist";
+    private static final String QUERY_FIND = "SELECT * FROM spotitube.playlists";
 
     @Override
     protected String findStatement() { return QUERY_FIND; }
 
-    @Override
-    protected String findAllStatement() { return QUERY_FINDALL; }
-
-    protected DomainObject doLoad(Long id, ResultSet rs) throws SQLException {
+    protected Playlist doLoad(int id, ResultSet rs) throws SQLException {
         String name = rs.getString(2);
         String owner = rs.getString(3);
 
