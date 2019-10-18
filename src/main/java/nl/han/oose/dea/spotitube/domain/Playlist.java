@@ -6,6 +6,10 @@ public class Playlist extends DomainObject {
     private boolean owner;
     private Track [] tracks;
 
+    public Playlist() {
+
+    }
+
     public Playlist(long id, String name, boolean owner) {
         this.id = id;
         this.name = name;
@@ -27,5 +31,21 @@ public class Playlist extends DomainObject {
 
     public Track[] getTracks() {
         return tracks;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOwner(boolean owner) {
+        this.owner = owner;
+    }
+
+    public void setTracks(Track[] tracks) {
+        this.tracks = tracks;
     }
 }

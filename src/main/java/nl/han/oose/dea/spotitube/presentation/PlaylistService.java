@@ -3,6 +3,7 @@ package nl.han.oose.dea.spotitube.presentation;
 import nl.han.oose.dea.spotitube.data.AbstractMapper;
 import nl.han.oose.dea.spotitube.data.PlaylistDataMapper;
 import nl.han.oose.dea.spotitube.domain.Playlist;
+import nl.han.oose.dea.spotitube.domain.User;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -13,6 +14,7 @@ import java.sql.ResultSet;
 public class PlaylistService {
 
     private AbstractMapper dataMapper;
+    private static final int MOCK_DURATION = 1234;
 
     @Inject
     public void setDataMapper(PlaylistDataMapper dataMapper) {
@@ -24,7 +26,7 @@ public class PlaylistService {
     public Response getAllPlaylists(@QueryParam("token") String token) {
         return Response
                 .status(200)
-                .entity(new PlaylistsDTO(dataMapper.findAll(), 1234))
+                .entity(new PlaylistsDTO(dataMapper.findAll(), MOCK_DURATION))
                 .build();
     }
 
@@ -35,7 +37,19 @@ public class PlaylistService {
         dataMapper.delete(id);
         return Response
                 .status(200)
-                .entity(dataMapper.findAll())
+                .entity(new PlaylistsDTO(dataMapper.findAll(), MOCK_DURATION))
                 .build();
+    }
+
+    @POST
+    @Consumes("application/json")
+    @Produces("application/json")
+    public Response addPlaylist(@QueryParam("token") String token, Playlist playlist) {
+        dataMapper.add(playlist);
+        return Response
+                .status(201)
+                .entity(new PlaylistsDTO(dataMapper.findAll(), MOCK_DURATION))
+                .build();
+
     }
 }
