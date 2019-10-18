@@ -3,12 +3,10 @@ package nl.han.oose.dea.spotitube.presentation;
 import nl.han.oose.dea.spotitube.data.AbstractMapper;
 import nl.han.oose.dea.spotitube.data.PlaylistDataMapper;
 import nl.han.oose.dea.spotitube.domain.Playlist;
-import nl.han.oose.dea.spotitube.domain.User;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
-import java.sql.ResultSet;
 
 @Path("/playlists")
 public class PlaylistService {
@@ -53,6 +51,12 @@ public class PlaylistService {
                 .status(201)
                 .entity(new PlaylistsDTO(dataMapper.findAll(), MOCK_DURATION))
                 .build();
+    }
 
+    @PUT
+    @Consumes("application/json")
+    @Produces("appliction/json")
+    public Response editPlaylist(@QueryParam("token") String token, Playlist playlist) {
+        return null;
     }
 }
