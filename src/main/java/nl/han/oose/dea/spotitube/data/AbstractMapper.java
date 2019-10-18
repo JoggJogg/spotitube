@@ -10,7 +10,10 @@ public abstract class AbstractMapper <T extends  DomainObject>  {
 
     abstract protected String findStatement();
     abstract protected String deleteStatement();
-    abstract protected T doLoad(int id, ResultSet rs) throws SQLException;
+    abstract protected String addStatement();
+
+    abstract protected T doLoad(ResultSet rs) throws SQLException;
+    abstract protected PreparedStatement setParameters(PreparedStatement statement, T object);
 
     protected T find(String keyword) throws SQLException {
         try {
@@ -59,6 +62,20 @@ public abstract class AbstractMapper <T extends  DomainObject>  {
         }
     }
 
+    public void add(T object) {
+        try {
+            DatabaseProperties properties = new DatabaseProperties();
+            Connection connection = DriverManager.getConnection(properties.connectionString());
+            PreparedStatement statement = connection.prepareStatement(addStatement());
+            statement = setParameters(statement, object);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     protected List<T> loadAll(ResultSet rs) throws SQLException {
         List<T> result = new ArrayList();
         while (rs.next()) {
@@ -68,8 +85,7 @@ public abstract class AbstractMapper <T extends  DomainObject>  {
     }
 
     protected T load(ResultSet rs) throws SQLException {
-        int id = rs.getInt(1);
-        T result = doLoad(id, rs);
+        T result = doLoad(rs);
         return result;
     }
 }
