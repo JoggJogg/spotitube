@@ -24,6 +24,7 @@ public class PlaylistService {
     @GET
     @Produces("application/json")
     public Response getAllPlaylists(@QueryParam("token") String token) {
+        if(token == null) return Response.status(400).build();
         return Response
                 .status(200)
                 .entity(new PlaylistsDTO(dataMapper.findAll(), MOCK_DURATION))
@@ -34,6 +35,7 @@ public class PlaylistService {
     @DELETE
     @Produces("application/json")
     public Response deletePlaylist(@QueryParam("token") String token, @PathParam("id") int id) {
+        if(token == null) return Response.status(400).build();
         dataMapper.delete(id);
         return Response
                 .status(200)
@@ -45,6 +47,7 @@ public class PlaylistService {
     @Consumes("application/json")
     @Produces("application/json")
     public Response addPlaylist(@QueryParam("token") String token, Playlist playlist) {
+        if(token == null) return Response.status(400).build();
         dataMapper.add(playlist);
         return Response
                 .status(201)
