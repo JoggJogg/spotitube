@@ -11,7 +11,7 @@ public class LocalStorage implements DataMapper <Token> {
 
     private static LocalStorage soleInstance = new LocalStorage();
 
-    private static LocalStorage getInstance() {
+    public static LocalStorage getInstance() {
         return soleInstance;
     }
 

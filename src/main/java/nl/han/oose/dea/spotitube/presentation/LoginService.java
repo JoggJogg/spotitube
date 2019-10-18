@@ -1,5 +1,6 @@
 package nl.han.oose.dea.spotitube.presentation;
 
+import nl.han.oose.dea.spotitube.data.LocalStorage;
 import nl.han.oose.dea.spotitube.data.LoginCredentialsDataMapper;
 import nl.han.oose.dea.spotitube.domain.Token;
 import nl.han.oose.dea.spotitube.domain.User;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 public class LoginService {
 
     private LoginCredentialsDataMapper dataMapper;
+    private LocalStorage localStorage;
 
     private static final int HTTP_CREATED = 201;
     private static final int HTTP_BAD_REQUEST = 400;
@@ -29,6 +31,8 @@ public class LoginService {
         try {
             if(dataMapper.correctLogin(user)) {
                 Token token = new Token(user);
+                localStorage = LocalStorage.getInstance();
+                localStorage.add(token);
                 return Response
                         .status(HTTP_CREATED)
                         .entity(token)
