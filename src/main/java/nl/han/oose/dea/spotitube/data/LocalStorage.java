@@ -1,27 +1,46 @@
 package nl.han.oose.dea.spotitube.data;
 
 import nl.han.oose.dea.spotitube.domain.Token;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalStorage {
+public class LocalStorage implements DataMapper <Token> {
 
-    private List<Token> storage;
+    private List<Token> tokens;
 
-    public LocalStorage() {
-        storage = new ArrayList<>();
+    private static LocalStorage soleInstance = new LocalStorage();
+
+    public static LocalStorage getInstance() {
+        return soleInstance;
     }
 
-    public void add(Token token) {
-        storage.add(token);
+    private LocalStorage() {
+        tokens = new ArrayList<>();
     }
 
-    public void remove(Token token) {
-        storage.remove(token);
+    @Override
+    public List<Token> findAll() {
+       return tokens;
     }
 
-    public Token get(String username) {
-        return storage.get(0);
+    @Override
+    public void add(Token object) {
+        tokens.add(object);
     }
 
+    @Override
+    public void delete(int id) {
+        tokens.remove(id);
+    }
+
+    @Override
+    public Token find(String keyword) {
+        for(Token token: tokens) {
+            if(token.getUser().equals(keyword)) {
+                return token;
+            }
+        }
+        return null;
+    }
 }
