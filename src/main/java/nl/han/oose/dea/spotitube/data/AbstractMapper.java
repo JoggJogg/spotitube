@@ -9,6 +9,7 @@ import java.util.*;
 public abstract class AbstractMapper <T extends  DomainObject>  {
 
     abstract protected String findStatement();
+    abstract protected String deleteStatement();
     abstract protected T doLoad(int id, ResultSet rs) throws SQLException;
 
     protected T find(String keyword) throws SQLException {
@@ -42,6 +43,20 @@ public abstract class AbstractMapper <T extends  DomainObject>  {
         }
 
         return domainObjects;
+    }
+
+    public void delete(int id) {
+        try {
+            DatabaseProperties properties = new DatabaseProperties();
+            Connection connection = DriverManager.getConnection(properties.connectionString());
+            PreparedStatement statement = connection.prepareStatement(deleteStatement());
+            statement.setInt(1, id);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     protected List<T> loadAll(ResultSet rs) throws SQLException {

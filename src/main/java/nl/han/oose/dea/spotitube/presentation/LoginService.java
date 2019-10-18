@@ -14,7 +14,6 @@ import java.sql.SQLException;
 public class LoginService {
 
     private LoginCredentialsDataMapper dataMapper;
-    private LocalStorage localStorage;
 
     private static final int HTTP_CREATED = 201;
     private static final int HTTP_BAD_REQUEST = 400;
@@ -31,7 +30,7 @@ public class LoginService {
         try {
             if(dataMapper.correctLogin(user)) {
                 Token token = new Token(user);
-                localStorage = LocalStorage.getInstance();
+                LocalStorage localStorage = LocalStorage.getInstance();
                 localStorage.add(token);
                 return Response
                         .status(HTTP_CREATED)
