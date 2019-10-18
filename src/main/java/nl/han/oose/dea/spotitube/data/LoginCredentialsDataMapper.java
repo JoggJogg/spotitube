@@ -8,11 +8,17 @@ import java.sql.SQLException;
 
 public class LoginCredentialsDataMapper extends AbstractMapper <User> {
 
-    private static final String FIND_QUERY = "SELECT * from spotitube.User WHERE username = ?";
+    private static final String FIND_QUERY = "SELECT * FROM spotitube.User WHERE username = ?";
+    private static final String DELETE_QUERY = "DELETE FROM spotitube.User WHERE username = ?";
 
     @Override
     protected String findStatement() {
         return FIND_QUERY;
+    }
+
+    @Override
+    protected String deleteStatement() {
+        return DELETE_QUERY;
     }
 
     @Override
