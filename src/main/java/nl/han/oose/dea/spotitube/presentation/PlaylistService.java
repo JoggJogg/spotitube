@@ -57,6 +57,8 @@ public class PlaylistService {
     @Consumes("application/json")
     @Produces("appliction/json")
     public Response editPlaylist(@QueryParam("token") String token, Playlist playlist) {
+        if(token == null) return Response.status(400).build();
+        dataMapper.update(playlist);
         return null;
     }
 }

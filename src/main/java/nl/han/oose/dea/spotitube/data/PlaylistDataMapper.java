@@ -11,6 +11,7 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
     private static final String FIND_QUERY = "SELECT * FROM spotitube.Playlist";
     private static final String DELETE_QUERY = "DELETE FROM spotitube.Playlist WHERE id = ?";
     private static final String ADD_QUERY = "INSERT INTO spotitube.Playlist (name, owner) VALUES (? , ?)";
+    private static final String UPDATE_QUERY = "UPDATE spotitube.Playlist SET name = ? WHERE id = ?";
 
     @Override
     protected String findStatement() { return FIND_QUERY; }
@@ -22,7 +23,12 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
     protected String addStatement() { return ADD_QUERY; }
 
     @Override
-    protected PreparedStatement setParameters(PreparedStatement statement, Playlist object) {
+    protected String updateStatement() {
+        return UPDATE_QUERY;
+    }
+
+    @Override
+    protected PreparedStatement setAddParameters(PreparedStatement statement, Playlist object) {
         try {
             LocalStorage localStorage = LocalStorage.getInstance();
             statement.setString(1, object.getName());
@@ -31,6 +37,11 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
             e.printStackTrace();
         }
         return statement;
+    }
+
+    @Override
+    protected PreparedStatement setUpdateParameters(PreparedStatement statement, Playlist object) {
+        return  statement;
     }
 
     protected Playlist doLoad(ResultSet rs) throws SQLException {

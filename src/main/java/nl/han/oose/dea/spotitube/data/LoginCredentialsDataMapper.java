@@ -35,7 +35,7 @@ public class LoginCredentialsDataMapper extends AbstractMapper <User> {
 
     // TODO implement
     @Override
-    protected PreparedStatement setParameters(PreparedStatement statement, User object) {
+    protected PreparedStatement setAddParameters(PreparedStatement statement, User object) {
         return null;
     }
 
