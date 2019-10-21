@@ -7,14 +7,14 @@ import org.mockito.Mockito;
 
 public class PlaylistServiceTest {
 
-    private PlaylistService sut;
+    private PlaylistResource sut;
     private PlaylistDataMapper mockedDataMapper;
 
     private static final String MOCK_TOKEN = "ABC";
 
     @BeforeEach
     public void setup() {
-        sut = new PlaylistService();
+        sut = new PlaylistResource();
     }
 
     @Test
