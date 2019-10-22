@@ -3,10 +3,7 @@ package nl.han.oose.dea.spotitube.presentation;
 import nl.han.oose.dea.spotitube.domain.services.TrackService;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 
 @Path("/tracks")
@@ -28,4 +25,5 @@ public class TrackResource {
                 .entity(trackService.getAvailableTracks(playlist))
                 .build();
     }
+
 }

@@ -25,5 +25,12 @@ public class PlaylistTrackResource {
                 .build();
     }
 
+    @DELETE
+    @Path("/{id}")
+    @Produces("application/json")
+    public Response removeTrackFromPlaylist(@QueryParam("token") String token) {
+        return null;
+    }
+
 
 }
