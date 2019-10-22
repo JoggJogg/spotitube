@@ -48,10 +48,4 @@ public class LoginCredentialsDataMapper extends AbstractMapper <User> {
     protected PreparedStatement setUpdateParameters(PreparedStatement statement, User object) {
         return null;
     }
-
-    public boolean correctLogin(User inputUser) throws SQLException {
-        String username = inputUser.getUser();
-        User databaseUser = find(username);
-        return inputUser.passWordsMatch(databaseUser);
-    }
 }

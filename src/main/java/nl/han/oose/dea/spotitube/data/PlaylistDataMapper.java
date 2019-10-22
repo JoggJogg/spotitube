@@ -41,7 +41,13 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
 
     @Override
     protected PreparedStatement setUpdateParameters(PreparedStatement statement, Playlist object) {
-        return  statement;
+        try {
+            statement.setString(1, object.getName());
+            statement.setInt(2, object.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return statement;
     }
 
     protected Playlist doLoad(ResultSet rs) throws SQLException {

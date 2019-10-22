@@ -1,7 +1,5 @@
 package nl.han.oose.dea.spotitube.presentation;
 
-import nl.han.oose.dea.spotitube.data.AbstractMapper;
-import nl.han.oose.dea.spotitube.data.PlaylistDataMapper;
 import nl.han.oose.dea.spotitube.domain.Playlist;
 import nl.han.oose.dea.spotitube.domain.services.IService;
 import nl.han.oose.dea.spotitube.domain.services.PlaylistService;
@@ -62,6 +60,9 @@ public class PlaylistResource {
     public Response editPlaylist(@QueryParam("token") String token, Playlist playlist) {
         if(token == null) return Response.status(400).build();
         itemService.update(playlist);
-        return null;
+        return Response
+                .status(200)
+                .entity(new PlaylistsDTO(itemService.findAll(), MOCK_DURATION))
+                .build();
     }
 }

@@ -17,7 +17,7 @@ public abstract class AbstractMapper <T extends  DomainObject>  {
     abstract protected PreparedStatement setAddParameters(PreparedStatement statement, T object);
     abstract protected PreparedStatement setUpdateParameters(PreparedStatement statement, T object);
 
-    protected T find(String keyword) {
+    public T find(String keyword) {
         try {
             DatabaseProperties properties = new DatabaseProperties();
             Connection connection = DriverManager.getConnection(properties.connectionString());

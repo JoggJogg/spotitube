@@ -2,7 +2,7 @@ package nl.han.oose.dea.spotitube.domain;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
-public class User extends DomainObject{
+public class User extends DomainObject {
 
     private String user;
     private String password;

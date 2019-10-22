@@ -36,6 +36,7 @@ public class LocalStorage implements DataMapper <Token> {
 
     @Override
     public Token find(String keyword) {
-        return tokens.get(0);
+        if(tokens.size() > 0) return tokens.get(0);
+        return null;
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PlaylistService implements IService <Playlist> {
 
-    private AbstractMapper<Playlist> dataMapper;
+    private AbstractMapper dataMapper;
 
     @Inject
     public void setDataMapper(PlaylistDataMapper dataMapper) {
