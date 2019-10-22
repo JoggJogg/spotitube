@@ -8,7 +8,7 @@ import java.util.*;
 
 public abstract class AbstractMapper <T extends  DomainObject>  {
 
-    abstract protected String findStatement();
+    abstract protected PreparedStatement findStatement(Connection connection, int id);
     abstract protected String deleteStatement();
     abstract protected String addStatement();
     abstract protected String updateStatement();
@@ -17,28 +17,28 @@ public abstract class AbstractMapper <T extends  DomainObject>  {
     abstract protected PreparedStatement setAddParameters(PreparedStatement statement, T object);
     abstract protected PreparedStatement setUpdateParameters(PreparedStatement statement, T object);
 
-    public T find(String keyword) {
+    public T find(int id) {
         try {
             DatabaseProperties properties = new DatabaseProperties();
             Connection connection = DriverManager.getConnection(properties.connectionString());
-            PreparedStatement findStatement = connection.prepareStatement(findStatement());
-            findStatement.setString(1, keyword);
+            PreparedStatement findStatement = findStatement(connection, id);
             ResultSet rs = findStatement.executeQuery();
             rs.next();
             T result = load(rs);
             return result;
         } catch (SQLException e) {
+            e.printStackTrace();
             return null;
        }
     }
 
-    public List<T> findAll() {
+    public List<T> findAll(int id) {
         List<T> domainObjects = new ArrayList<>();
 
         try {
             DatabaseProperties properties = new DatabaseProperties();
             Connection connection = DriverManager.getConnection(properties.connectionString());
-            PreparedStatement statement = connection.prepareStatement(findStatement());
+            PreparedStatement statement = findStatement(connection, id);
             ResultSet results = statement.executeQuery();
             domainObjects = loadAll(results);
             statement.close();

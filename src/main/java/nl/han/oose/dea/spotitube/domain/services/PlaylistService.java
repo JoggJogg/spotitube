@@ -25,7 +25,7 @@ public class PlaylistService implements IService <Playlist> {
     }
 
     public List<Playlist> findAll() {
-        return dataMapper.findAll();
+        return dataMapper.findAll(-1);
     }
 
     public void update(Playlist playlist) {
