@@ -1,8 +1,9 @@
-package nl.han.oose.dea.spotitube.presentation;
+package nl.han.oose.dea.spotitube.presentation.resources;
 
 import nl.han.oose.dea.spotitube.domain.Playlist;
 import nl.han.oose.dea.spotitube.domain.services.IService;
 import nl.han.oose.dea.spotitube.domain.services.PlaylistService;
+import nl.han.oose.dea.spotitube.presentation.dto.PlaylistsDTO;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;

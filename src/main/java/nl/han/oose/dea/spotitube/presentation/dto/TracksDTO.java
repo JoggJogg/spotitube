@@ -1,4 +1,4 @@
-package nl.han.oose.dea.spotitube.presentation;
+package nl.han.oose.dea.spotitube.presentation.dto;
 
 import nl.han.oose.dea.spotitube.domain.Track;
 

@@ -1,6 +1,7 @@
 package nl.han.oose.dea.spotitube.presentation;
 
 import nl.han.oose.dea.spotitube.domain.services.PlaylistService;
+import nl.han.oose.dea.spotitube.presentation.resources.PlaylistResource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
