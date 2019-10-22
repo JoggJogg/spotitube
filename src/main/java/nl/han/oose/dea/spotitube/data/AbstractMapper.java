@@ -11,11 +11,13 @@ public abstract class AbstractMapper <T extends  DomainObject>  {
     abstract protected String findStatement();
     abstract protected String deleteStatement();
     abstract protected String addStatement();
+    abstract protected String updateStatement();
 
     abstract protected T doLoad(ResultSet rs) throws SQLException;
-    abstract protected PreparedStatement setParameters(PreparedStatement statement, T object);
+    abstract protected PreparedStatement setAddParameters(PreparedStatement statement, T object);
+    abstract protected PreparedStatement setUpdateParameters(PreparedStatement statement, T object);
 
-    protected T find(String keyword) throws SQLException {
+    public T find(String keyword) {
         try {
             DatabaseProperties properties = new DatabaseProperties();
             Connection connection = DriverManager.getConnection(properties.connectionString());
@@ -67,7 +69,21 @@ public abstract class AbstractMapper <T extends  DomainObject>  {
             DatabaseProperties properties = new DatabaseProperties();
             Connection connection = DriverManager.getConnection(properties.connectionString());
             PreparedStatement statement = connection.prepareStatement(addStatement());
-            statement = setParameters(statement, object);
+            statement = setAddParameters(statement, object);
+            statement.executeUpdate();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(T object) {
+        try {
+            DatabaseProperties properties = new DatabaseProperties();
+            Connection connection = DriverManager.getConnection(properties.connectionString());
+            PreparedStatement statement = connection.prepareStatement(updateStatement());
+            statement = setUpdateParameters(statement, object);
             statement.executeUpdate();
             statement.close();
             connection.close();

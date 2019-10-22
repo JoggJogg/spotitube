@@ -27,6 +27,11 @@ public class LoginCredentialsDataMapper extends AbstractMapper <User> {
     protected String addStatement() { return ADD_QUERY; }
 
     @Override
+    protected String updateStatement() {
+        return null;
+    }
+
+    @Override
     protected User doLoad(ResultSet rs) throws SQLException {
         String username = rs.getString(2);
         String password = rs.getString(3);
@@ -35,13 +40,12 @@ public class LoginCredentialsDataMapper extends AbstractMapper <User> {
 
     // TODO implement
     @Override
-    protected PreparedStatement setParameters(PreparedStatement statement, User object) {
+    protected PreparedStatement setAddParameters(PreparedStatement statement, User object) {
         return null;
     }
 
-    public boolean correctLogin(User inputUser) throws SQLException {
-        String username = inputUser.getUser();
-        User databaseUser = find(username);
-        return inputUser.passWordsMatch(databaseUser);
+    @Override
+    protected PreparedStatement setUpdateParameters(PreparedStatement statement, User object) {
+        return null;
     }
 }

@@ -1,7 +1,7 @@
 package nl.han.oose.dea.spotitube.domain;
 
 public class Playlist extends DomainObject {
-    private long id;
+    private int id;
     private String name;
     private boolean owner;
     private Track [] tracks;
@@ -10,14 +10,14 @@ public class Playlist extends DomainObject {
 
     }
 
-    public Playlist(long id, String name, boolean owner) {
+    public Playlist(int id, String name, boolean owner) {
         this.id = id;
         this.name = name;
         this.owner = owner;
         this.tracks = new Track[]{};
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
@@ -33,7 +33,7 @@ public class Playlist extends DomainObject {
         return tracks;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

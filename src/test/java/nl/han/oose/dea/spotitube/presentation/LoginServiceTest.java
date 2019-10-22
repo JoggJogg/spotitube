@@ -10,14 +10,14 @@ import javax.ws.rs.core.Response;
 
 public class LoginServiceTest {
 
-    private LoginService sut;
+    private LoginResource sut;
     private User mockedUser;
 
     private static final int HTTP_CREATED = 201;
 
     @BeforeEach
     public void setup() {
-        sut = new LoginService();
+        sut = new LoginResource();
     }
 
     @Test
