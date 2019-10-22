@@ -2,12 +2,9 @@ package nl.han.oose.dea.spotitube.data;
 
 import nl.han.oose.dea.spotitube.domain.Token;
 
-import java.util.ArrayList;
-import java.util.List;
+public class LocalStorage  {
 
-public class LocalStorage implements DataMapper <Token> {
-
-    private List<Token> tokens;
+    private Token token;
 
     private static LocalStorage soleInstance = new LocalStorage();
 
@@ -15,28 +12,13 @@ public class LocalStorage implements DataMapper <Token> {
         return soleInstance;
     }
 
-    private LocalStorage() {
-        tokens = new ArrayList<>();
+    private LocalStorage() {}
+
+    public void setToken(Token token) {
+        this.token = token;
     }
 
-    @Override
-    public List<Token> findAll() {
-       return tokens;
-    }
-
-    @Override
-    public void add(Token object) {
-        tokens.add(object);
-    }
-
-    @Override
-    public void delete(int id) {
-        tokens.remove(id);
-    }
-
-    @Override
-    public Token find(String keyword) {
-        if(tokens.size() > 0) return tokens.get(0);
-        return null;
+    public Token getToken() {
+       return token;
     }
 }

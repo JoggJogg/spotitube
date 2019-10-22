@@ -23,10 +23,9 @@ public class TrackResource {
     @Produces("application/json")
     public Response getAvailableTracks(@QueryParam("forPlaylist") int playlist, @QueryParam("token") String token) {
         if(token == null) return Response.status(400).build();
-        TracksDTO tracks = trackService.getAvailableTracks(playlist);
         return Response
                 .status(200)
-                .entity(tracks)
+                .entity(trackService.getAvailableTracks(playlist))
                 .build();
     }
 }

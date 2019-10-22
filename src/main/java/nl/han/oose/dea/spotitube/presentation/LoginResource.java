@@ -31,7 +31,7 @@ public class LoginResource {
         if(itemService.correctLogin(user)) {
             Token token = new Token(user);
             LocalStorage localStorage = LocalStorage.getInstance();
-            localStorage.add(token);
+            localStorage.setToken(token);
             return Response
                     .status(HTTP_CREATED)
                     .entity(token)

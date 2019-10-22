@@ -41,7 +41,7 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
         try {
             LocalStorage localStorage = LocalStorage.getInstance();
             statement.setString(1, object.getName());
-            statement.setString(2, localStorage.find("CHANGE-THIS").getUser());
+            statement.setString(2, localStorage.getToken().getUser());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -64,8 +64,7 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
         int id = rs.getInt(1);
         String name = rs.getString(2);
         String owner = rs.getString(3);
-        // TODO change the method find so that it doesnt need input parameter for LocalStorage
-        String currentUser = localStorage.find("CHANGE-THIS").getUser();
+        String currentUser = localStorage.getToken().getUser();
         return new Playlist(id, name, owner.equals(currentUser));
     }
 
