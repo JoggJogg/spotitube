@@ -1,7 +1,7 @@
 package nl.han.oose.dea.spotitube.domain.services;
 
-import nl.han.oose.dea.spotitube.data.TrackDataMapper;
-import nl.han.oose.dea.spotitube.domain.Track;
+import nl.han.oose.dea.spotitube.data.mappers.TrackDataMapper;
+import nl.han.oose.dea.spotitube.domain.pojo.Track;
 import nl.han.oose.dea.spotitube.presentation.dto.TracksDTO;
 
 import javax.inject.Inject;

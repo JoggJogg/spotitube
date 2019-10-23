@@ -1,15 +1,14 @@
 package nl.han.oose.dea.spotitube.domain.services;
 
-import nl.han.oose.dea.spotitube.data.AbstractMapper;
-import nl.han.oose.dea.spotitube.data.PlaylistDataMapper;
-import nl.han.oose.dea.spotitube.domain.Playlist;
+import nl.han.oose.dea.spotitube.data.mappers.PlaylistDataMapper;
+import nl.han.oose.dea.spotitube.domain.pojo.Playlist;
 
 import javax.inject.Inject;
 import java.util.List;
 
-public class PlaylistService implements IService <Playlist> {
+public class PlaylistService  {
 
-    private AbstractMapper dataMapper;
+    private PlaylistDataMapper dataMapper;
 
     @Inject
     public void setDataMapper(PlaylistDataMapper dataMapper) {
@@ -30,5 +29,9 @@ public class PlaylistService implements IService <Playlist> {
 
     public void update(Playlist playlist) {
         dataMapper.update(playlist);
+    }
+
+    public int getLength() {
+       return dataMapper.getLength();
     }
 }

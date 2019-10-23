@@ -1,6 +1,6 @@
 package nl.han.oose.dea.spotitube.presentation.dto;
 
-import nl.han.oose.dea.spotitube.domain.Track;
+import nl.han.oose.dea.spotitube.domain.pojo.Track;
 
 import java.util.List;
 

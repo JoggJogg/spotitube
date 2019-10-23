@@ -1,24 +1,35 @@
 package nl.han.oose.dea.spotitube.presentation.dto;
 
-import nl.han.oose.dea.spotitube.domain.Playlist;
+import nl.han.oose.dea.spotitube.domain.pojo.Playlist;
 
 import java.util.List;
 
 public class PlaylistsDTO {
 
     private List<Playlist> playlists;
-    private int duration;
+    private int length;
 
-    public PlaylistsDTO(List playlists, int duration) {
+    public PlaylistsDTO() {}
+
+    public PlaylistsDTO(List playlists, int length) {
         this.playlists = playlists;
-        this.duration = duration;
+        this.length = length;
     }
 
     public List<Playlist> getPlaylists() {
         return playlists;
     }
 
-    public int getDuration() {
-        return duration;
+    public int getLength() {
+        return length;
+    }
+
+    public void setPlaylists(List<Playlist> playlists) {
+        this.playlists = playlists;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 }
+
