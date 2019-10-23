@@ -100,7 +100,12 @@ public class TrackDataMapper  {
         int playcount = rs.getInt("playcount");
         String date = rs.getString("publicationDate");
         String description = rs.getString("description");
-        boolean offlineAvailable = rs.getBoolean("offlineAvailable");
+        boolean offlineAvailable = false;
+        try {
+            offlineAvailable = rs.getBoolean("offlineAvailable");
+        } catch (SQLException e) {
+
+        }
         return new Track(id, title, performer, duration, album, playcount, date, description, offlineAvailable);
     }
 }
