@@ -31,12 +31,12 @@ public class PlaylistResource {
                 .build();
     }
 
-    @Path("/{id}")
+    @Path("/{playlistId}")
     @DELETE
     @Produces("application/json")
-    public Response deletePlaylist(@QueryParam("token") String token, @PathParam("id") int id) {
+    public Response deletePlaylist(@QueryParam("token") String token, @PathParam("playlistId") int playlistId) {
         if(token == null) return Response.status(400).build();
-        itemService.delete(id);
+        itemService.delete(playlistId);
         return Response
                 .status(200)
                 .entity(new PlaylistsDTO(itemService.findAll(), MOCK_DURATION))
