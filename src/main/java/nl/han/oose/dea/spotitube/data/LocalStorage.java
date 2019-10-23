@@ -1,6 +1,6 @@
 package nl.han.oose.dea.spotitube.data;
 
-import nl.han.oose.dea.spotitube.domain.Token;
+import nl.han.oose.dea.spotitube.domain.pojo.Token;
 
 public class LocalStorage  {
 

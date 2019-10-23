@@ -1,6 +1,6 @@
 package nl.han.oose.dea.spotitube.presentation.resources;
 
-import nl.han.oose.dea.spotitube.domain.Track;
+import nl.han.oose.dea.spotitube.domain.pojo.Track;
 import nl.han.oose.dea.spotitube.domain.services.TrackService;
 
 import javax.inject.Inject;
