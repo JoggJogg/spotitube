@@ -5,6 +5,7 @@ import nl.han.oose.dea.spotitube.data.LoginCredentialsDataMapper;
 import nl.han.oose.dea.spotitube.domain.User;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class LoginService {
 
@@ -17,7 +18,11 @@ public class LoginService {
 
     public boolean correctLogin(User inputUser) {
         String username = inputUser.getUser();
-        User databaseUser = dataMapper.find(username);
+        List<User> users = dataMapper.findAll(-1);
+        User databaseUser = null;
+        for(User user : users) {
+            if(user.getUser().equals(username)) databaseUser = user;
+        }
         return inputUser.passWordsMatch(databaseUser);
     }
 }

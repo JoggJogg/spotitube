@@ -3,19 +3,26 @@ package nl.han.oose.dea.spotitube.data;
 import nl.han.oose.dea.spotitube.domain.DomainObject;
 import nl.han.oose.dea.spotitube.domain.User;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginCredentialsDataMapper extends AbstractMapper <User> {
 
-    private static final String FIND_QUERY = "SELECT * FROM spotitube.User WHERE username = ?";
-    private static final String DELETE_QUERY = "DELETE FROM spotitube.User WHERE username = ?";
-    private static final String ADD_QUERY = "INSERT INTO spotitube.User (username, password) VALUES (?, ?)";
+    private static final String FIND_QUERY = "SELECT * FROM User";
+    private static final String DELETE_QUERY = "DELETE FROM User WHERE username = ?";
+    private static final String ADD_QUERY = "INSERT INTO User (username, password) VALUES (?, ?)";
 
     @Override
-    protected String findStatement() {
-        return FIND_QUERY;
+    protected PreparedStatement findStatement(Connection connection, int id) {
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(FIND_QUERY);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return statement;
     }
 
     @Override

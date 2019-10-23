@@ -1,4 +1,4 @@
-package nl.han.oose.dea.spotitube.presentation;
+package nl.han.oose.dea.spotitube.presentation.resources;
 
 import nl.han.oose.dea.spotitube.data.LocalStorage;
 import nl.han.oose.dea.spotitube.data.LoginCredentialsDataMapper;
@@ -31,7 +31,7 @@ public class LoginResource {
         if(itemService.correctLogin(user)) {
             Token token = new Token(user);
             LocalStorage localStorage = LocalStorage.getInstance();
-            localStorage.add(token);
+            localStorage.setToken(token);
             return Response
                     .status(HTTP_CREATED)
                     .entity(token)

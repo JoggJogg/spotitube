@@ -2,6 +2,7 @@ package nl.han.oose.dea.spotitube.presentation;
 
 import nl.han.oose.dea.spotitube.domain.DomainObject;
 import nl.han.oose.dea.spotitube.domain.Playlist;
+import nl.han.oose.dea.spotitube.presentation.dto.PlaylistsDTO;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
