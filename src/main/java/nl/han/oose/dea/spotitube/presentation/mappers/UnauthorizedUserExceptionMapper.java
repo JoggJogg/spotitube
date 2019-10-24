@@ -1,6 +1,6 @@
 package nl.han.oose.dea.spotitube.presentation.mappers;
 
-import nl.han.oose.dea.spotitube.domain.exception.UnauthorizedUserException;
+import nl.han.oose.dea.spotitube.domain.exceptions.UnauthorizedUserException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

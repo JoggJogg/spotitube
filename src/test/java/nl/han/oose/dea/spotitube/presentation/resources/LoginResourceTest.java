@@ -20,13 +20,13 @@ public class LoginResourceTest {
         sut = new LoginResource();
         user = new User();
         mockedService = Mockito.mock(AuthenticationService.class);
-        sut.setItemService(mockedService);
+        sut.setAuthenticationService(mockedService);
     }
 
     @Test
     public void handleLoginSuccessReturnsCreatedStatusCode() {
         // Arrange
-        Mockito.when(mockedService.correctLogin(user)).thenReturn(true);
+        Mockito.when(mockedService.login(user)).thenReturn(true);
 
         // Act
         Response response = sut.handleLogin(user);
@@ -38,7 +38,7 @@ public class LoginResourceTest {
     @Test
     public void handleLoginFailReturnsBadRequestStatusCode() {
         // Arrange
-        Mockito.when(mockedService.correctLogin(user)).thenReturn(false);
+        Mockito.when(mockedService.login(user)).thenReturn(false);
 
         // Act
         Response response = sut.handleLogin(user);
@@ -55,7 +55,7 @@ public class LoginResourceTest {
         sut.handleLogin(user);
 
         // Assert
-        Mockito.verify(mockedService).correctLogin(user);
+        Mockito.verify(mockedService).login(user);
     }
 
 }

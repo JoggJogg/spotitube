@@ -1,7 +1,5 @@
 package nl.han.oose.dea.spotitube.domain.pojo;
 
-import org.apache.commons.codec.digest.DigestUtils;
-
 public class User {
 
     private String user;
@@ -28,7 +26,4 @@ public class User {
         this.password = password;
     }
 
-    public boolean passWordsMatch(User databaseUser) {
-        return DigestUtils.sha256Hex(this.password).equals(databaseUser.password);
-    }
 }
