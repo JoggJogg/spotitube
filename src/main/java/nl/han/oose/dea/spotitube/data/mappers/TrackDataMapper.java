@@ -6,11 +6,15 @@ import nl.han.oose.dea.spotitube.domain.pojo.Track;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TrackDataMapper  {
 
     private Connection connection;
     private PreparedStatement statement;
+
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     private static final String SELECT_ALL_TRACKS_FROM_PLAYLIST =
             "SELECT t.id, t.title, t.performer, t.duration, t.album, t.playcount, CAST(t.publicationDate AS CHAR) as publicationDate, t.description, p.offlineAvailable " +
@@ -49,7 +53,7 @@ public class TrackDataMapper  {
             statement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
         }
         return tracks;
     }
@@ -65,7 +69,7 @@ public class TrackDataMapper  {
             statement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
         }
     }
 
@@ -79,7 +83,7 @@ public class TrackDataMapper  {
             statement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
         }
     }
 
@@ -103,8 +107,8 @@ public class TrackDataMapper  {
         boolean offlineAvailable = false;
         try {
             offlineAvailable = rs.getBoolean("offlineAvailable");
-        } catch (SQLException ignored) {
-
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
         }
         return new Track(id, title, performer, duration, album, playcount, date, description, offlineAvailable);
     }

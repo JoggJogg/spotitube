@@ -1,17 +1,19 @@
 package nl.han.oose.dea.spotitube.data.mappers;
 
 import nl.han.oose.dea.spotitube.data.util.DatabaseConnection;
-import nl.han.oose.dea.spotitube.data.util.DatabaseProperties;
 import nl.han.oose.dea.spotitube.domain.pojo.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AuthenticationDataMapper  {
 
     private Connection connection;
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     private static final String FIND_QUERY = "SELECT * FROM User WHERE username = ?";
 
@@ -27,7 +29,7 @@ public class AuthenticationDataMapper  {
             statement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
         }
         return databaseUser;
     }
@@ -41,6 +43,4 @@ public class AuthenticationDataMapper  {
     private Connection getConnection() throws SQLException {
         return new DatabaseConnection().getConnection();
     }
-
-
 }
