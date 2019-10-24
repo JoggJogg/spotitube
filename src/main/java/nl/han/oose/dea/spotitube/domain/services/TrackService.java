@@ -5,6 +5,7 @@ import nl.han.oose.dea.spotitube.domain.pojo.Track;
 import nl.han.oose.dea.spotitube.presentation.dto.TracksDTO;
 
 import javax.inject.Inject;
+import java.util.List;
 
 
 public class TrackService  {
@@ -16,12 +17,12 @@ public class TrackService  {
         this.dataMapper = dataMapper;
     }
 
-    public TracksDTO getAvailableTracks(int playlist) {
-        return new TracksDTO(dataMapper.getAllAvailableTracks(playlist));
+    public List<Track> getAvailableTracks(int playlist) {
+        return dataMapper.getAllAvailableTracks(playlist);
     }
 
-    public TracksDTO getAllTracksFromPlaylist(int playlist) {
-        return new TracksDTO(dataMapper.getAllTracksFromPlaylist(playlist));
+    public List<Track> getAllTracksFromPlaylist(int playlist) {
+        return dataMapper.getAllTracksFromPlaylist(playlist);
     }
 
     public void removeTrackFromPlaylist(int trackId, int playlistId) {
@@ -31,8 +32,5 @@ public class TrackService  {
     public void addTrackToPlaylist(Track track, int playlistId) {
         dataMapper.addTrack(track, playlistId);
     }
-
-
-
 
 }

@@ -40,7 +40,7 @@ public class PlaylistResource {
         tokenService.validateToken(token);
         playlistService.delete(playlistId);
         return Response
-                .status(200)
+                .status(Response.Status.OK)
                 .entity(new PlaylistsDTO(playlistService.findAll(), playlistService.getLength()))
                 .build();
     }
@@ -52,19 +52,19 @@ public class PlaylistResource {
         tokenService.validateToken(token);
         playlistService.add(playlist);
         return Response
-                .status(201)
+                .status(Response.Status.CREATED)
                 .entity(new PlaylistsDTO(playlistService.findAll(), playlistService.getLength()))
                 .build();
     }
 
     @PUT
     @Consumes("application/json")
-    @Produces("appliction/json")
+    @Produces("application/json")
     public Response editPlaylist(@QueryParam("token") String token, Playlist playlist) {
         tokenService.validateToken(token);
         playlistService.update(playlist);
         return Response
-                .status(200)
+                .status(Response.Status.OK)
                 .entity(new PlaylistsDTO(playlistService.findAll(), playlistService.getLength()))
                 .build();
     }

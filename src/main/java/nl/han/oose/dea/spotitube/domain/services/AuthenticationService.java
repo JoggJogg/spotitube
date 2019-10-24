@@ -18,9 +18,9 @@ public class AuthenticationService {
         this.dataMapper = dataMapper;
     }
 
-    public boolean login(User inputUser) {
+    public void login(User inputUser) {
         User databaseUser = findDatabaseUser(inputUser);
-         return checkPassword(inputUser, databaseUser);
+        checkPassword(inputUser, databaseUser);
     }
 
     private User findDatabaseUser(User inputUser) {
@@ -33,8 +33,7 @@ public class AuthenticationService {
         return databaseUser;
     }
 
-    private boolean checkPassword(User inputUser, User databaseUser) {
+    private void checkPassword(User inputUser, User databaseUser) {
         if(!DigestUtils.sha256Hex(inputUser.getPassword()).equals(databaseUser.getPassword())) throw new UnauthorizedUserException();
-        else return true;
     }
 }
