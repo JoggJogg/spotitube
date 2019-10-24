@@ -1,8 +1,8 @@
 package nl.han.oose.dea.spotitube.domain.services;
 
 import nl.han.oose.dea.spotitube.data.LocalStorage;
-import nl.han.oose.dea.spotitube.domain.exception.BadRequestException;
-import nl.han.oose.dea.spotitube.domain.exception.ForbiddenRequestException;
+import nl.han.oose.dea.spotitube.domain.exceptions.BadRequestException;
+import nl.han.oose.dea.spotitube.domain.exceptions.ForbiddenRequestException;
 
 import javax.inject.Inject;
 
@@ -16,7 +16,7 @@ public class TokenService {
     }
 
     public void validateToken(String token) {
-        if(token == null) throw new BadRequestException();
+        if(token == null || localStorage.getToken() == null) throw new BadRequestException();
         if(!token.equals(localStorage.getToken().getToken())) throw new ForbiddenRequestException();
     }
 }

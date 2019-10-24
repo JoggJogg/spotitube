@@ -1,6 +1,7 @@
 package nl.han.oose.dea.spotitube.presentation.mappers;
 
-import javax.ws.rs.BadRequestException;
+import nl.han.oose.dea.spotitube.domain.exceptions.BadRequestException;
+
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;

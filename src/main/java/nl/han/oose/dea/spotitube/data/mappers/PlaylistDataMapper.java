@@ -4,6 +4,7 @@ import nl.han.oose.dea.spotitube.data.LocalStorage;
 import nl.han.oose.dea.spotitube.data.util.DatabaseProperties;
 import nl.han.oose.dea.spotitube.domain.pojo.Playlist;
 
+import javax.inject.Inject;
 import java.sql.*;
 
 public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
@@ -13,6 +14,13 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
     private static final String ADD_QUERY = "INSERT INTO Playlist (name, owner) VALUES (? , ?)";
     private static final String UPDATE_QUERY = "UPDATE Playlist SET name = ? WHERE id = ?";
     private static final String LENGTH_QUERY = "SELECT SUM(duration) as length from Track INNER JOIN PlayListTrack PLT on Track.id = PLT.track_id";
+
+    private LocalStorage localStorage;
+
+    @Inject
+    public void setLocalStorage(LocalStorage localStorage) {
+        this.localStorage = localStorage;
+    }
 
     @Override
     protected PreparedStatement findStatement(Connection connection, int id) {
@@ -39,7 +47,6 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
     @Override
     protected PreparedStatement setAddParameters(PreparedStatement statement, Playlist object) {
         try {
-            LocalStorage localStorage = LocalStorage.getInstance();
             statement.setString(1, object.getName());
             statement.setString(2, localStorage.getToken().getUser());
         } catch (SQLException e) {
@@ -60,7 +67,6 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
     }
 
     protected Playlist doLoad(ResultSet rs) throws SQLException {
-        LocalStorage localStorage = LocalStorage.getInstance();
         int id = rs.getInt(1);
         String name = rs.getString(2);
         String owner = rs.getString(3);

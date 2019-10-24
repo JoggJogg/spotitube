@@ -12,29 +12,27 @@ import javax.ws.rs.core.Response;
 @Path("/login")
 public class LoginResource {
 
-    private AuthenticationService itemService;
+    private AuthenticationService authenticationService;
+    private LocalStorage localStorage;
 
     @Inject
-    public void setItemService(AuthenticationService itemService) {
-        this.itemService = itemService;
+    public void setAuthenticationService(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
     }
+
+    @Inject
+    public void setLocalStorage(LocalStorage localStorage) { this.localStorage = localStorage; }
 
     @POST
     @Consumes("application/json")
     @Produces("application/json")
     public Response handleLogin(User user) {
-        if(itemService.correctLogin(user)) {
-            Token token = new Token(user);
-            LocalStorage localStorage = LocalStorage.getInstance();
-            localStorage.setToken(token);
-            return Response
-                    .status(Response.Status.CREATED)
-                    .entity(token)
-                    .build();
-        }
+        Token token = new Token(user);
+        authenticationService.login(user);
+        localStorage.setToken(token);
         return Response
-                .status(Response.Status.BAD_REQUEST)
-                .entity(null)
+                .status(Response.Status.CREATED)
+                .entity(token)
                 .build();
     }
 }

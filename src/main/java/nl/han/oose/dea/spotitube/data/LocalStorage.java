@@ -2,17 +2,12 @@ package nl.han.oose.dea.spotitube.data;
 
 import nl.han.oose.dea.spotitube.domain.pojo.Token;
 
+import javax.inject.Singleton;
+
+@Singleton
 public class LocalStorage  {
 
     private Token token;
-
-    private static LocalStorage soleInstance = new LocalStorage();
-
-    public static LocalStorage getInstance() {
-        return soleInstance;
-    }
-
-    public LocalStorage() {}
 
     public void setToken(Token token) {
         this.token = token;
