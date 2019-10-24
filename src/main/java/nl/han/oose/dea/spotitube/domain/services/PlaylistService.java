@@ -24,7 +24,7 @@ public class PlaylistService  {
     }
 
     public List<Playlist> findAll() {
-        return dataMapper.findAll(-1);
+        return dataMapper.findAll();
     }
 
     public void update(Playlist playlist) {

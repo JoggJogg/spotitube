@@ -1,6 +1,6 @@
 package nl.han.oose.dea.spotitube.data.mappers;
 
-import nl.han.oose.dea.spotitube.data.util.DatabaseProperties;
+import nl.han.oose.dea.spotitube.data.util.DatabaseConnection;
 import nl.han.oose.dea.spotitube.domain.pojo.Track;
 
 import java.sql.*;
@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrackDataMapper  {
+
+    private Connection connection;
+    private PreparedStatement statement;
 
     private static final String SELECT_ALL_TRACKS_FROM_PLAYLIST =
             "SELECT t.id, t.title, t.performer, t.duration, t.album, t.playcount, CAST(t.publicationDate AS CHAR) as publicationDate, t.description, p.offlineAvailable " +
@@ -38,9 +41,8 @@ public class TrackDataMapper  {
         List<Track> tracks = new ArrayList<>();
 
         try {
-            DatabaseProperties properties = new DatabaseProperties();
-            Connection connection = DriverManager.getConnection(properties.connectionString());
-            PreparedStatement statement = connection.prepareStatement(query);
+            connection = getConnection();
+            statement = connection.prepareStatement(query);
             statement.setInt(1, playlist);
             ResultSet rs = statement.executeQuery();
             tracks = loadAll(rs);
@@ -54,9 +56,8 @@ public class TrackDataMapper  {
 
     public void addTrack(Track track, int playlistId) {
         try {
-            DatabaseProperties properties = new DatabaseProperties();
-            Connection connection = DriverManager.getConnection(properties.connectionString());
-            PreparedStatement statement = connection.prepareStatement(ADD_TRACK_TO_PLAYLIST);
+            connection = getConnection();
+            statement = connection.prepareStatement(ADD_TRACK_TO_PLAYLIST);
             statement.setInt(1, track.getId());
             statement.setInt(2, playlistId);
             statement.setBoolean(3, track.isOfflineAvailable());
@@ -70,9 +71,8 @@ public class TrackDataMapper  {
 
     public void deleteTrack(int trackId, int playlistId) {
         try {
-            DatabaseProperties properties = new DatabaseProperties();
-            Connection connection = DriverManager.getConnection(properties.connectionString());
-            PreparedStatement statement = connection.prepareStatement(DELETE_TRACK_FROM_PLAYLIST);
+            connection = getConnection();
+            statement = connection.prepareStatement(DELETE_TRACK_FROM_PLAYLIST);
             statement.setInt(1, playlistId);
             statement.setInt(2, trackId);
             statement.executeUpdate();
@@ -107,5 +107,9 @@ public class TrackDataMapper  {
 
         }
         return new Track(id, title, performer, duration, album, playcount, date, description, offlineAvailable);
+    }
+
+    private Connection getConnection() throws SQLException {
+        return new DatabaseConnection().getConnection();
     }
 }

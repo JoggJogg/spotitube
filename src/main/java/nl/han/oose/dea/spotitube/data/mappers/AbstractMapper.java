@@ -1,43 +1,42 @@
 package nl.han.oose.dea.spotitube.data.mappers;
 
-import nl.han.oose.dea.spotitube.data.util.DatabaseProperties;
+import nl.han.oose.dea.spotitube.data.util.DatabaseConnection;
 
 import java.sql.*;
 import java.util.*;
 
 public abstract class AbstractMapper <T>  {
 
+    private Connection connection;
+    private PreparedStatement statement;
+
     abstract protected PreparedStatement findStatement(Connection connection, int id);
-    abstract protected String deleteStatement();
-    abstract protected String addStatement();
-    abstract protected String updateStatement();
+    abstract protected PreparedStatement findAllStatement(Connection connection);
+    abstract protected PreparedStatement deleteStatement(Connection connection, int id);
+    abstract protected PreparedStatement addStatement(Connection connection, T object);
+    abstract protected PreparedStatement updateStatement(Connection connection, T object);
 
     abstract protected T doLoad(ResultSet rs) throws SQLException;
-    abstract protected PreparedStatement setAddParameters(PreparedStatement statement, T object);
-    abstract protected PreparedStatement setUpdateParameters(PreparedStatement statement, T object);
 
     public T find(int id) {
         try {
-            DatabaseProperties properties = new DatabaseProperties();
-            Connection connection = DriverManager.getConnection(properties.connectionString());
-            PreparedStatement findStatement = findStatement(connection, id);
-            ResultSet rs = findStatement.executeQuery();
+            connection = getConnection();
+            statement = findStatement(connection, id);
+            ResultSet rs = statement.executeQuery();
             rs.next();
-            T result = load(rs);
-            return result;
+            return load(rs);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
        }
     }
 
-    public List<T> findAll(int id) {
+    public List<T> findAll() {
         List<T> domainObjects = new ArrayList<>();
 
         try {
-            DatabaseProperties properties = new DatabaseProperties();
-            Connection connection = DriverManager.getConnection(properties.connectionString());
-            PreparedStatement statement = findStatement(connection, id);
+            connection = getConnection();
+            statement = findAllStatement(connection);
             ResultSet results = statement.executeQuery();
             domainObjects = loadAll(results);
             statement.close();
@@ -45,16 +44,13 @@ public abstract class AbstractMapper <T>  {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return domainObjects;
     }
 
     public void delete(int id) {
         try {
-            DatabaseProperties properties = new DatabaseProperties();
-            Connection connection = DriverManager.getConnection(properties.connectionString());
-            PreparedStatement statement = connection.prepareStatement(deleteStatement());
-            statement.setInt(1, id);
+            connection = getConnection();
+            statement = deleteStatement(connection, id);
             statement.executeUpdate();
             statement.close();
             connection.close();
@@ -65,10 +61,8 @@ public abstract class AbstractMapper <T>  {
 
     public void add(T object) {
         try {
-            DatabaseProperties properties = new DatabaseProperties();
-            Connection connection = DriverManager.getConnection(properties.connectionString());
-            PreparedStatement statement = connection.prepareStatement(addStatement());
-            statement = setAddParameters(statement, object);
+            connection = getConnection();
+            statement = addStatement(connection, object);
             statement.executeUpdate();
             statement.close();
             connection.close();
@@ -79,10 +73,8 @@ public abstract class AbstractMapper <T>  {
 
     public void update(T object) {
         try {
-            DatabaseProperties properties = new DatabaseProperties();
-            Connection connection = DriverManager.getConnection(properties.connectionString());
-            PreparedStatement statement = connection.prepareStatement(updateStatement());
-            statement = setUpdateParameters(statement, object);
+            connection = getConnection();
+            statement = updateStatement(connection, object);
             statement.executeUpdate();
             statement.close();
             connection.close();
@@ -102,5 +94,9 @@ public abstract class AbstractMapper <T>  {
     protected T load(ResultSet rs) throws SQLException {
         T result = doLoad(rs);
         return result;
+    }
+
+    private Connection getConnection() throws SQLException {
+        return new DatabaseConnection().getConnection();
     }
 }

@@ -1,13 +1,14 @@
 package nl.han.oose.dea.spotitube.presentation.resources;
 
-import nl.han.oose.dea.spotitube.data.LocalStorage;
-import nl.han.oose.dea.spotitube.domain.pojo.Token;
-import nl.han.oose.dea.spotitube.domain.services.AuthenticationService;
 import nl.han.oose.dea.spotitube.domain.services.TokenService;
 import nl.han.oose.dea.spotitube.domain.services.TrackService;
+import nl.han.oose.dea.spotitube.presentation.dto.TracksDTO;
 
 import javax.inject.Inject;
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
 @Path("/tracks")
@@ -27,9 +28,8 @@ public class TrackResource {
     public Response getAvailableTracks(@QueryParam("forPlaylist") int playlist, @QueryParam("token") String token) {
         tokenService.validateToken(token);
         return Response
-                .status(200)
-                .entity(trackService.getAvailableTracks(playlist))
+                .status(Response.Status.OK)
+                .entity(new TracksDTO(trackService.getAvailableTracks(playlist)))
                 .build();
     }
-
 }

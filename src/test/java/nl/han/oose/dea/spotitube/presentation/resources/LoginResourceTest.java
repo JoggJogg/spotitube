@@ -2,12 +2,9 @@ package nl.han.oose.dea.spotitube.presentation.resources;
 
 import nl.han.oose.dea.spotitube.domain.pojo.User;
 import nl.han.oose.dea.spotitube.domain.services.AuthenticationService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import javax.ws.rs.core.Response;
 
 public class LoginResourceTest {
 
@@ -21,30 +18,6 @@ public class LoginResourceTest {
         user = new User();
         mockedService = Mockito.mock(AuthenticationService.class);
         sut.setAuthenticationService(mockedService);
-    }
-
-    @Test
-    public void handleLoginSuccessReturnsCreatedStatusCode() {
-        // Arrange
-        Mockito.when(mockedService.login(user)).thenReturn(true);
-
-        // Act
-        Response response = sut.handleLogin(user);
-
-        // Assert
-        Assertions.assertEquals(Response.Status.CREATED.getStatusCode(), response.getStatus());
-    }
-
-    @Test
-    public void handleLoginFailReturnsBadRequestStatusCode() {
-        // Arrange
-        Mockito.when(mockedService.login(user)).thenReturn(false);
-
-        // Act
-        Response response = sut.handleLogin(user);
-
-        // Assert
-        Assertions.assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
     }
 
     @Test
