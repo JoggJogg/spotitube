@@ -1,12 +1,11 @@
 package nl.han.oose.dea.spotitube.data.mappers;
 
 import nl.han.oose.dea.spotitube.data.util.DatabaseProperties;
-import nl.han.oose.dea.spotitube.domain.pojo.DomainObject;
 
 import java.sql.*;
 import java.util.*;
 
-public abstract class AbstractMapper <T extends  DomainObject>  {
+public abstract class AbstractMapper <T>  {
 
     abstract protected PreparedStatement findStatement(Connection connection, int id);
     abstract protected String deleteStatement();

@@ -1,6 +1,7 @@
 package nl.han.oose.dea.spotitube.presentation.resources;
 
 import nl.han.oose.dea.spotitube.domain.pojo.Track;
+import nl.han.oose.dea.spotitube.domain.services.TokenService;
 import nl.han.oose.dea.spotitube.domain.services.TrackService;
 
 import javax.inject.Inject;
@@ -11,15 +12,20 @@ import javax.ws.rs.core.Response;
 public class PlaylistTrackResource {
 
     private TrackService trackService;
+    private TokenService tokenService;
 
     @Inject
     public void setTrackService(TrackService trackService) {
         this.trackService = trackService;
     }
 
+    @Inject
+    public void setTokenService(TokenService tokenService) { this.tokenService = tokenService; }
+
     @GET
     @Produces("application/json")
     public Response getAllTracksFromPlaylist(@QueryParam("token") String token, @PathParam("playlistId") int playlistId) {
+        tokenService.validateToken(token);
         return Response
                 .status(200)
                 .entity(trackService.getAllTracksFromPlaylist(playlistId))

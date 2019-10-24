@@ -18,7 +18,7 @@ public class PojoTest {
 
     private static final String POJO_PACKAGE = "nl.han.oose.dea.spotitube.domain.pojo";
 
-    private static final int  EXPECTED_CLASS_COUNT = 6;
+    private static final int  EXPECTED_CLASS_COUNT = 5;
 
     @Test
     public void ensureExpectedPojoCount() {
