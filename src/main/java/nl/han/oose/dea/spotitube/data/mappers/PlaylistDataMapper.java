@@ -9,7 +9,8 @@ import java.sql.*;
 
 public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
 
-    private static final String FIND_QUERY = "SELECT * FROM Playlist";
+    private static final String FIND_QUERY = "SELECT * FROM Playlist WHERE id = ?";
+    private static final String FIND_ALL_QUERY = "SELECT * FROM Playlist";
     private static final String DELETE_QUERY = "DELETE FROM Playlist WHERE id = ?";
     private static final String ADD_QUERY = "INSERT INTO Playlist (name, owner) VALUES (? , ?)";
     private static final String UPDATE_QUERY = "UPDATE Playlist SET name = ? WHERE id = ?";
@@ -27,6 +28,7 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(FIND_QUERY);
+            statement.setInt(1, id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -34,19 +36,33 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
     }
 
     @Override
-    protected String deleteStatement() { return DELETE_QUERY; }
-
-    @Override
-    protected String addStatement() { return ADD_QUERY; }
-
-    @Override
-    protected String updateStatement() {
-        return UPDATE_QUERY;
+    protected PreparedStatement findAllStatement(Connection connection) {
+        PreparedStatement statement = null;
+        try {
+            statement= connection.prepareStatement(FIND_ALL_QUERY);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return statement;
     }
 
     @Override
-    protected PreparedStatement setAddParameters(PreparedStatement statement, Playlist object) {
+    protected PreparedStatement deleteStatement(Connection connection, int id) {
+        PreparedStatement statement = null;
         try {
+            statement = connection.prepareStatement(DELETE_QUERY);
+            statement.setInt(1, id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return statement;
+    }
+
+    @Override
+    protected PreparedStatement addStatement(Connection connection, Playlist object) {
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(ADD_QUERY);
             statement.setString(1, object.getName());
             statement.setString(2, localStorage.getToken().getUser());
         } catch (SQLException e) {
@@ -56,8 +72,10 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
     }
 
     @Override
-    protected PreparedStatement setUpdateParameters(PreparedStatement statement, Playlist object) {
+    protected PreparedStatement updateStatement(Connection connection, Playlist object) {
+        PreparedStatement statement = null;
         try {
+            statement = connection.prepareStatement(UPDATE_QUERY);
             statement.setString(1, object.getName());
             statement.setInt(2, object.getId());
         } catch (SQLException e) {
@@ -66,6 +84,7 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
         return statement;
     }
 
+    @Override
     protected Playlist doLoad(ResultSet rs) throws SQLException {
         int id = rs.getInt(1);
         String name = rs.getString(2);
@@ -84,10 +103,8 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist>  {
             rs.next();
             length = rs.getInt(1);
         } catch (SQLException e) {
-
+            e.printStackTrace();
         }
         return length;
     }
-
-
 }

@@ -7,15 +7,14 @@ import nl.han.oose.dea.spotitube.domain.pojo.User;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.inject.Inject;
-import java.util.List;
 
 public class AuthenticationService {
 
-    private AbstractMapper<User> dataMapper;
+    private AuthenticationDataMapper authenticationDataMapper;
 
     @Inject
     public void setDataMapper(AuthenticationDataMapper dataMapper) {
-        this.dataMapper = dataMapper;
+        this.authenticationDataMapper = dataMapper;
     }
 
     public void login(User inputUser) {
@@ -24,13 +23,7 @@ public class AuthenticationService {
     }
 
     private User findDatabaseUser(User inputUser) {
-        String username = inputUser.getUser();
-        List<User> users = dataMapper.findAll(-1);
-        User databaseUser = null;
-        for(User user : users) {
-            if(user.getUser().equals(username)) databaseUser = user;
-        }
-        return databaseUser;
+        return authenticationDataMapper.find(inputUser);
     }
 
     private void checkPassword(User inputUser, User databaseUser) {
