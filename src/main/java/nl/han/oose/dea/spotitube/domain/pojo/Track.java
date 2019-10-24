@@ -1,6 +1,6 @@
 package nl.han.oose.dea.spotitube.domain.pojo;
 
-public class Track extends DomainObject{
+public class Track {
 
     private int id;
     private String title;

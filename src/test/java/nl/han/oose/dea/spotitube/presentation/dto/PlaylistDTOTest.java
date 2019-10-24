@@ -1,6 +1,5 @@
 package nl.han.oose.dea.spotitube.presentation.dto;
 
-import nl.han.oose.dea.spotitube.domain.pojo.DomainObject;
 import nl.han.oose.dea.spotitube.domain.pojo.Playlist;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ public class PlaylistDTOTest {
 
     private PlaylistsDTO sut;
     private Playlist mockedPlaylist;
-    private List<DomainObject> list;
+    private List<Playlist> list;
 
     private static final int MOCKED_DURATION = 123;
 

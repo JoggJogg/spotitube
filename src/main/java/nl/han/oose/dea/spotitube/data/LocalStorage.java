@@ -12,7 +12,7 @@ public class LocalStorage  {
         return soleInstance;
     }
 
-    private LocalStorage() {}
+    public LocalStorage() {}
 
     public void setToken(Token token) {
         this.token = token;

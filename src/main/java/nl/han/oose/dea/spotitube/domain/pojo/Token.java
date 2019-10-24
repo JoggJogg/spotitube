@@ -2,7 +2,7 @@ package nl.han.oose.dea.spotitube.domain.pojo;
 
 import java.util.UUID;
 
-public class Token extends DomainObject {
+public class Token {
 
     private String token;
     private String user;
