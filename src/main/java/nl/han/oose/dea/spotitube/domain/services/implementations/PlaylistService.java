@@ -1,6 +1,6 @@
 package nl.han.oose.dea.spotitube.domain.services.implementations;
 
-import nl.han.oose.dea.spotitube.data.mappers.PlaylistDataMapper;
+import nl.han.oose.dea.spotitube.data.mappers.implementations.PlaylistDataMapper;
 import nl.han.oose.dea.spotitube.domain.pojo.Playlist;
 import nl.han.oose.dea.spotitube.domain.services.PlaylistServiceInterface;
 
