@@ -4,11 +4,15 @@ import nl.han.oose.dea.spotitube.data.util.DatabaseConnection;
 
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class AbstractMapper <T>  {
 
     private Connection connection;
     private PreparedStatement statement;
+
+    private Logger logger = Logger.getLogger(getClass().getName());
 
     abstract protected PreparedStatement findStatement(Connection connection, int id);
     abstract protected PreparedStatement findAllStatement(Connection connection);
@@ -18,7 +22,7 @@ public abstract class AbstractMapper <T>  {
 
     abstract protected T doLoad(ResultSet rs) throws SQLException;
 
-    public T find(int id) {
+    protected T find(int id) {
         try {
             connection = getConnection();
             statement = findStatement(connection, id);
@@ -26,7 +30,7 @@ public abstract class AbstractMapper <T>  {
             rs.next();
             return load(rs);
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
             return null;
        }
     }
@@ -42,7 +46,7 @@ public abstract class AbstractMapper <T>  {
             statement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
         }
         return domainObjects;
     }
@@ -55,7 +59,7 @@ public abstract class AbstractMapper <T>  {
             statement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
         }
     }
 
@@ -67,7 +71,7 @@ public abstract class AbstractMapper <T>  {
             statement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
         }
     }
 
@@ -79,24 +83,33 @@ public abstract class AbstractMapper <T>  {
             statement.close();
             connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
         }
     }
 
-    protected List<T> loadAll(ResultSet rs) throws SQLException {
+    private List<T> loadAll(ResultSet rs) {
         List<T> result = new ArrayList();
-        while (rs.next()) {
-            result.add(load(rs));
+        try {
+            while (rs.next()) {
+                result.add(load(rs));
+            }
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
         }
         return result;
     }
 
-    protected T load(ResultSet rs) throws SQLException {
-        T result = doLoad(rs);
+    private T load(ResultSet rs) {
+        T result = null;
+        try {
+            result = doLoad(rs);
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, "Error communicating with the database: " + e);
+        }
         return result;
     }
 
-    private Connection getConnection() throws SQLException {
+    private Connection getConnection() {
         return new DatabaseConnection().getConnection();
     }
 }

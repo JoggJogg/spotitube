@@ -34,7 +34,7 @@ public class AuthenticationDataMapper  {
         return databaseUser;
     }
 
-    protected User doLoad(ResultSet rs) throws SQLException {
+    private User doLoad(ResultSet rs) throws SQLException {
         String username = rs.getString(2);
         String password = rs.getString(3);
         return new User(username, password);
