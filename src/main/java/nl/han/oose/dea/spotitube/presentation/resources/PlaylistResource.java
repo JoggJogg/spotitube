@@ -1,8 +1,10 @@
 package nl.han.oose.dea.spotitube.presentation.resources;
 
 import nl.han.oose.dea.spotitube.domain.pojo.Playlist;
-import nl.han.oose.dea.spotitube.domain.services.PlaylistService;
-import nl.han.oose.dea.spotitube.domain.services.TokenService;
+import nl.han.oose.dea.spotitube.domain.services.PlaylistServiceInterface;
+import nl.han.oose.dea.spotitube.domain.services.TokenServiceInterface;
+import nl.han.oose.dea.spotitube.domain.services.implementations.PlaylistService;
+import nl.han.oose.dea.spotitube.domain.services.implementations.TokenService;
 import nl.han.oose.dea.spotitube.presentation.dto.PlaylistsDTO;
 
 import javax.inject.Inject;
@@ -12,16 +14,16 @@ import javax.ws.rs.core.Response;
 @Path("/playlists")
 public class PlaylistResource {
 
-    private PlaylistService playlistService;
-    private TokenService tokenService;
+    private PlaylistServiceInterface playlistService;
+    private TokenServiceInterface tokenService;
 
     @Inject
-    public void setItemService(PlaylistService itemService) {
-        this.playlistService = itemService;
+    public void setItemService(PlaylistServiceInterface playlistService) {
+        this.playlistService = playlistService;
     }
 
     @Inject
-    public void setTokenService(TokenService tokenService) { this.tokenService = tokenService; }
+    public void setTokenService(TokenServiceInterface tokenService) { this.tokenService = tokenService; }
 
     @GET
     @Produces("application/json")
