@@ -1,6 +1,6 @@
 package nl.han.oose.dea.spotitube.presentation.resources;
 
-import nl.han.oose.dea.spotitube.data.implementations.LocalStorage;
+import nl.han.oose.dea.spotitube.data.mappers.implementations.LocalStorage;
 import nl.han.oose.dea.spotitube.domain.pojo.Token;
 import nl.han.oose.dea.spotitube.domain.pojo.User;
 import nl.han.oose.dea.spotitube.domain.services.AuthenticationServiceInterface;

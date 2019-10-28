@@ -1,7 +1,7 @@
 package nl.han.oose.dea.spotitube.data.mappers.implementations;
 
 import nl.han.oose.dea.spotitube.data.mappers.TrackDataMapperInterface;
-import nl.han.oose.dea.spotitube.data.util.DatabaseConnection;
+import nl.han.oose.dea.spotitube.data.connection.DatabaseConnection;
 import nl.han.oose.dea.spotitube.domain.pojo.Track;
 
 import java.sql.*;

@@ -1,6 +1,6 @@
 package nl.han.oose.dea.spotitube.data.mappers.implementations;
 
-import nl.han.oose.dea.spotitube.data.util.DatabaseConnection;
+import nl.han.oose.dea.spotitube.data.connection.DatabaseConnection;
 
 import java.sql.*;
 import java.util.*;

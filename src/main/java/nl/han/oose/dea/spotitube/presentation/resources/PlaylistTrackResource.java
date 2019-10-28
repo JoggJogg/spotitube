@@ -3,8 +3,6 @@ package nl.han.oose.dea.spotitube.presentation.resources;
 import nl.han.oose.dea.spotitube.domain.pojo.Track;
 import nl.han.oose.dea.spotitube.domain.services.TokenServiceInterface;
 import nl.han.oose.dea.spotitube.domain.services.TrackServiceInterface;
-import nl.han.oose.dea.spotitube.domain.services.implementations.TokenService;
-import nl.han.oose.dea.spotitube.domain.services.implementations.TrackService;
 import nl.han.oose.dea.spotitube.presentation.dto.TracksDTO;
 
 import javax.inject.Inject;
@@ -39,6 +37,7 @@ public class PlaylistTrackResource {
     @Path("/{trackId}")
     @Produces("application/json")
     public Response removeTrackFromPlaylist(@QueryParam("token") String token, @PathParam("playlistId") int playlistId, @PathParam("trackId") int trackId) {
+        tokenService.validateToken(token);
         trackService.removeTrackFromPlaylist(trackId, playlistId);
         return Response
                 .status(Response.Status.OK)
@@ -49,6 +48,7 @@ public class PlaylistTrackResource {
     @POST
     @Produces("application/json")
     public Response addTrackToPlaylist(@QueryParam("token") String token, @PathParam("playlistId") int playlistId, Track track) {
+        tokenService.validateToken(token);
         trackService.addTrackToPlaylist(track, playlistId);
         return Response
                 .status(Response.Status.CREATED)

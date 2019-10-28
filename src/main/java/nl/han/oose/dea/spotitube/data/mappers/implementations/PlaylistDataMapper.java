@@ -1,7 +1,6 @@
 package nl.han.oose.dea.spotitube.data.mappers.implementations;
 
-import nl.han.oose.dea.spotitube.data.implementations.LocalStorage;
-import nl.han.oose.dea.spotitube.data.util.DatabaseProperties;
+import nl.han.oose.dea.spotitube.data.connection.DatabaseProperties;
 import nl.han.oose.dea.spotitube.domain.pojo.Playlist;
 
 import javax.inject.Inject;
@@ -17,7 +16,7 @@ public class PlaylistDataMapper extends AbstractMapper <Playlist> {
 
     private static final String FIND_QUERY = "SELECT * FROM Playlist WHERE id = ?";
     private static final String FIND_ALL_QUERY = "SELECT * FROM Playlist";
-    private static final String DELETE_QUERY = "DELETE FROM Playlist WHERE id = ?";
+    private static final String DELETE_QUERY = "DELETE FROM Playlist p INNER JOIN PlaylistTrack pt ON p.id = pt.playlist_id WHERE id = ?";
     private static final String ADD_QUERY = "INSERT INTO Playlist (name, owner) VALUES (? , ?)";
     private static final String UPDATE_QUERY = "UPDATE Playlist SET name = ? WHERE id = ?";
     private static final String LENGTH_QUERY = "SELECT SUM(duration) as length from Track INNER JOIN PlayListTrack PLT on Track.id = PLT.track_id";

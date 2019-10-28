@@ -1,7 +1,6 @@
 package nl.han.oose.dea.spotitube.domain.services.implementations;
 
-import nl.han.oose.dea.spotitube.data.LocalStorageInterface;
-import nl.han.oose.dea.spotitube.data.implementations.LocalStorage;
+import nl.han.oose.dea.spotitube.data.mappers.LocalStorageInterface;
 import nl.han.oose.dea.spotitube.domain.exceptions.InvalidTokenException;
 import nl.han.oose.dea.spotitube.domain.exceptions.MissingTokenException;
 import nl.han.oose.dea.spotitube.domain.services.TokenServiceInterface;
