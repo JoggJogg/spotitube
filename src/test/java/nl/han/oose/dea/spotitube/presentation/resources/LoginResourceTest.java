@@ -1,7 +1,7 @@
 package nl.han.oose.dea.spotitube.presentation.resources;
 
 import nl.han.oose.dea.spotitube.domain.pojo.User;
-import nl.han.oose.dea.spotitube.domain.services.AuthenticationService;
+import nl.han.oose.dea.spotitube.domain.services.implementations.AuthenticationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

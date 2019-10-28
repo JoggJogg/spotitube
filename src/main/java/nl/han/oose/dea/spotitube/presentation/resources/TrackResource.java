@@ -1,7 +1,7 @@
 package nl.han.oose.dea.spotitube.presentation.resources;
 
-import nl.han.oose.dea.spotitube.domain.services.TokenService;
-import nl.han.oose.dea.spotitube.domain.services.TrackService;
+import nl.han.oose.dea.spotitube.domain.services.TokenServiceInterface;
+import nl.han.oose.dea.spotitube.domain.services.TrackServiceInterface;
 import nl.han.oose.dea.spotitube.presentation.dto.TracksDTO;
 
 import javax.inject.Inject;
@@ -14,14 +14,14 @@ import javax.ws.rs.core.Response;
 @Path("/tracks")
 public class TrackResource {
 
-    private TrackService trackService;
-    private TokenService tokenService;
+    private TrackServiceInterface trackService;
+    private TokenServiceInterface tokenService;
 
     @Inject
-    public void setTrackService(TrackService trackService) { this.trackService = trackService; }
+    public void setTrackService(TrackServiceInterface trackService) { this.trackService = trackService; }
 
     @Inject
-    public void setTokenService(TokenService tokenService) { this.tokenService = tokenService; }
+    public void setTokenService(TokenServiceInterface tokenService) { this.tokenService = tokenService; }
 
     @GET
     @Produces("application/json")

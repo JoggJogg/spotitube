@@ -1,9 +1,9 @@
 package nl.han.oose.dea.spotitube.presentation.resources;
 
-import nl.han.oose.dea.spotitube.data.LocalStorage;
-import nl.han.oose.dea.spotitube.domain.services.AuthenticationService;
+import nl.han.oose.dea.spotitube.data.mappers.implementations.LocalStorage;
 import nl.han.oose.dea.spotitube.domain.pojo.Token;
 import nl.han.oose.dea.spotitube.domain.pojo.User;
+import nl.han.oose.dea.spotitube.domain.services.AuthenticationServiceInterface;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -12,11 +12,11 @@ import javax.ws.rs.core.Response;
 @Path("/login")
 public class LoginResource {
 
-    private AuthenticationService authenticationService;
+    private AuthenticationServiceInterface authenticationService;
     private LocalStorage localStorage;
 
     @Inject
-    public void setAuthenticationService(AuthenticationService authenticationService) {
+    public void setAuthenticationService(AuthenticationServiceInterface authenticationService) {
         this.authenticationService = authenticationService;
     }
 
